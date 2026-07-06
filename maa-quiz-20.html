@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مَا کوئز — ۲۰ سوالات</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap');
+
+  :root{
+    --emerald-deep:#0b3d2e;
+    --emerald:#14532d;
+    --emerald-soft:#e8f3ec;
+    --gold:#c9a227;
+    --gold-soft:#f2e6bd;
+    --cream:#fbf8f1;
+    --ink:#1f2a24;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--cream);
+    font-family:'Noto Nastaliq Urdu', serif;
+    color:var(--ink);
+    direction:rtl;
+    padding:0 0 40px;
+  }
+
+  .header{
+    background:linear-gradient(135deg,var(--emerald-deep),var(--emerald));
+    color:var(--gold-soft);
+    padding:28px 20px 22px;
+    text-align:center;
+  }
+
+  .header .eyebrow{
+    font-family:'Amiri', serif;
+    font-size:13px;
+    letter-spacing:2px;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+
+  .header h1{
+    margin:0;
+    font-family:'Amiri','Noto Naskh Arabic', serif;
+    font-size:34px;
+    font-weight:700;
+    color:#ffffff;
+  }
+
+  .header .subtitle{
+    margin-top:8px;
+    font-size:16px;
+    color:var(--gold-soft);
+  }
+
+  .nav-bar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#ffffff;
+    border-bottom:2px solid var(--gold-soft);
+    padding:10px 12px;
+    box-shadow:0 2px 10px rgba(11,61,46,0.08);
+  }
+
+  .nav-label{
+    font-size:13px;
+    color:var(--emerald-deep);
+    text-align:center;
+    margin-bottom:6px;
+    font-family:'Amiri', serif;
+  }
+
+  .nav-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    justify-content:center;
+    max-width:600px;
+    margin:0 auto;
+  }
+
+  .nav-btn{
+    width:32px;
+    height:32px;
+    border-radius:8px;
+    background:var(--cream);
+    border:2px solid var(--emerald-soft);
+    color:var(--emerald-deep);
+    font-family:'Amiri', serif;
+    font-size:14px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    text-decoration:none;
+    transition:all 0.15s;
+  }
+
+  .nav-btn:hover{
+    background:var(--emerald-soft);
+  }
+
+  .nav-btn.done-correct{
+    background:#d9f2e3;
+    border-color:#1d7a3f;
+    color:#1d7a3f;
+  }
+
+  .nav-btn.done-wrong{
+    background:#fbdedb;
+    border-color:#b3261e;
+    color:#b3261e;
+  }
+
+  .page{
+    max-width:700px;
+    margin:0 auto;
+    padding:20px 16px;
+  }
+
+  .intro-box{
+    background:#ffffff;
+    border:1px solid #e7e0cf;
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:20px;
+    font-size:16px;
+    line-height:1.95;
+    text-align:center;
+    color:var(--emerald-deep);
+  }
+
+  .quiz-q{
+    background:#ffffff;
+    border:2px solid #e7e0cf;
+    border-radius:14px;
+    padding:20px 22px;
+    margin-bottom:18px;
+    scroll-margin-top:90px;
+    transition:border-color 0.2s;
+  }
+
+  .q-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+  }
+
+  .q-number{
+    background:var(--emerald-deep);
+    color:#ffffff;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Amiri', serif;
+    font-size:15px;
+    flex-shrink:0;
+  }
+
+  .arabic-example{
+    font-family:'Amiri','Noto Naskh Arabic', serif;
+    font-size:24px;
+    color:var(--emerald-deep);
+    font-weight:700;
+    margin-bottom:10px;
+    line-height:2;
+    direction:rtl;
+  }
+
+  .hint{
+    font-size:15px;
+    color:#6b7a71;
+    text-align:center;
+    margin-bottom:14px;
+    font-family:'Amiri', serif;
+    background:var(--cream);
+    border-radius:8px;
+    padding:10px 12px;
+  }
+
+  .blank{
+    display:inline-block;
+    min-width:40px;
+    font-weight:700;
+    padding:1px 8px;
+    border-radius:6px;
+    border-bottom:2px solid #b0bdb5;
+  }
+
+  .blank.filled-correct{
+    color:#1d7a3f;
+    background:#d9f2e3;
+    border-bottom-color:#1d7a3f;
+    animation:blinkGreen 0.6s ease;
+  }
+
+  .blank.filled-wrong{
+    color:#b3261e;
+    background:#fbdedb;
+    border-bottom-color:#b3261e;
+    animation:blinkRed 0.6s ease;
+  }
+
+  @keyframes blinkGreen{
+    0%{background:#ffffff;}
+    30%{background:#7fdba0;}
+    60%{background:#ffffff;}
+    100%{background:#d9f2e3;}
+  }
+
+  @keyframes blinkRed{
+    0%{background:#ffffff;}
+    30%{background:#f39a92;}
+    60%{background:#ffffff;}
+    100%{background:#fbdedb;}
+  }
+
+  .options{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+  }
+
+  .opt{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:18px;
+    background:var(--cream);
+    border:2px solid var(--emerald-soft);
+    border-radius:10px;
+    padding:9px 20px;
+    cursor:pointer;
+  }
+
+  .opt input{
+    width:17px;
+    height:17px;
+    accent-color:var(--emerald);
+  }
+
+  .feedback{
+    text-align:center;
+    margin-top:10px;
+    font-size:16px;
+    font-weight:600;
+    min-height:22px;
+  }
+
+  .feedback.correct{color:#1d7a3f;}
+  .feedback.incorrect{color:#b3261e;}
+
+  .quiz-q.correct-box{border-color:#1d7a3f;}
+  .quiz-q.incorrect-box{border-color:#b3261e;}
+
+  #checkBtn{
+    display:block;
+    margin:24px auto 0;
+    background:var(--emerald-deep);
+    color:#ffffff;
+    border:none;
+    font-family:'Noto Nastaliq Urdu', serif;
+    font-size:19px;
+    padding:14px 40px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+
+  #checkBtn:hover{
+    background:var(--emerald);
+  }
+
+  #scoreBox{
+    text-align:center;
+    margin-top:18px;
+    font-size:21px;
+    font-weight:700;
+    color:var(--emerald-deep);
+  }
+
+  @media (max-width:480px){
+    .header h1{font-size:28px;}
+    .arabic-example{font-size:20px;}
+    .nav-btn{width:28px;height:28px;font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">فہمِ قرآن اکیڈمی</div>
+  <h1>مَا کوئز</h1>
+  <div class="subtitle">۲۰ سوالات — قرآن سے، آسان مثالیں</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-label">👇 سیدھا کسی بھی سوال پر جانے کے لیے نمبر دبائیں</div>
+  <div class="nav-grid" id="navGrid"></div>
+</div>
+
+<div class="page">
+
+  <div class="intro-box">
+    ہر جملے میں <strong>مَا</strong> کا مطلب چنیں — "نہیں" یا "جو"۔ جواب منتخب کرتے ہی فوراً پتا چل جائے گا۔
+  </div>
+
+  <div id="quiz">
+
+    <div class="quiz-q" id="q1" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۱</span></div>
+      <div class="arabic-example">مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ</div>
+      <div class="hint">( تیرے رب نے <span class="blank" data-blank="q1">____</span> تجھے چھوڑا اور <span class="blank" data-blank="q1">____</span> وہ ناراض ہوا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q1" value="نہیں" onchange="fillBlank('q1')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q1" value="جو" onchange="fillBlank('q1')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q2" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۲</span></div>
+      <div class="arabic-example">مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ</div>
+      <div class="hint">( اُس کا مال اور جو اُس نے کمایا، اُس کے کچھ کام <span class="blank" data-blank="q2">____</span> آیا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q2" value="نہیں" onchange="fillBlank('q2')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q2" value="جو" onchange="fillBlank('q2')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q3" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۳</span></div>
+      <div class="arabic-example">مَا كَذَبَ الْفُؤَادُ مَا رَأَىٰ</div>
+      <div class="hint">( دل نے جھوٹ <span class="blank" data-blank="q3">____</span> کہا جو اُس نے دیکھا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q3" value="نہیں" onchange="fillBlank('q3')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q3" value="جو" onchange="fillBlank('q3')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q4" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۴</span></div>
+      <div class="arabic-example">فَمَا رَبِحَت تِّجَارَتُهُمْ</div>
+      <div class="hint">( تو اُن کی تجارت نے نفع <span class="blank" data-blank="q4">____</span> دیا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q4" value="نہیں" onchange="fillBlank('q4')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q4" value="جو" onchange="fillBlank('q4')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q5" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۵</span></div>
+      <div class="arabic-example">مَا لَكُم مِّنْ إِلَٰهٍ غَيْرُهُ</div>
+      <div class="hint">( تمہارے لیے اُس کے سوا کوئی معبود <span class="blank" data-blank="q5">____</span> )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q5" value="نہیں" onchange="fillBlank('q5')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q5" value="جو" onchange="fillBlank('q5')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q6" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۶</span></div>
+      <div class="arabic-example">مَا جَعَلَ اللَّهُ مِن بَحِيرَةٍ وَلَا سَائِبَةٍ</div>
+      <div class="hint">( اللہ نے <span class="blank" data-blank="q6">____</span> بحیرہ بنائی، نہ سائبہ )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q6" value="نہیں" onchange="fillBlank('q6')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q6" value="جو" onchange="fillBlank('q6')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q7" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۷</span></div>
+      <div class="arabic-example">مَا كُنَّا مُهْلِكِي الْقُرَىٰ إِلَّا وَأَهْلُهَا ظَالِمُونَ</div>
+      <div class="hint">( ہم بستیوں کو ہلاک کرنے والے <span class="blank" data-blank="q7">____</span> تھے مگر یہ کہ وہاں کے لوگ ظالم ہوں )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q7" value="نہیں" onchange="fillBlank('q7')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q7" value="جو" onchange="fillBlank('q7')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q8" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۸</span></div>
+      <div class="arabic-example">وَمَا رَبُّكَ بِظَلَّامٍ لِّلْعَبِيدِ</div>
+      <div class="hint">( اور تیرا رب بندوں پر ظلم کرنے والا <span class="blank" data-blank="q8">____</span> )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q8" value="نہیں" onchange="fillBlank('q8')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q8" value="جو" onchange="fillBlank('q8')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q9" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۹</span></div>
+      <div class="arabic-example">وَمَا كَانَ صَلَاتُهُمْ عِندَ الْبَيْتِ إِلَّا مُكَاءً وَتَصْدِيَةً</div>
+      <div class="hint">( اور اُن کی نماز بیت اللہ کے پاس <span class="blank" data-blank="q9">____</span> تھی مگر سیٹی اور تالی بجانا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q9" value="نہیں" onchange="fillBlank('q9')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q9" value="جو" onchange="fillBlank('q9')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q10" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۱۰</span></div>
+      <div class="arabic-example">وَمَا أَنَا عَلَيْكُم بِوَكِيلٍ</div>
+      <div class="hint">( اور میں تم پر نگہبان <span class="blank" data-blank="q10">____</span> ہوں )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q10" value="نہیں" onchange="fillBlank('q10')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q10" value="جو" onchange="fillBlank('q10')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q11" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۱۱</span></div>
+      <div class="arabic-example">وَمَا أُوتِيتُم مِّنَ الْعِلْمِ إِلَّا قَلِيلًا</div>
+      <div class="hint">( اور تمہیں علم میں سے تھوڑا ہی دیا گیا ہے — یعنی زیادہ <span class="blank" data-blank="q11">____</span> دیا گیا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q11" value="نہیں" onchange="fillBlank('q11')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q11" value="جو" onchange="fillBlank('q11')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q12" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۲</span></div>
+      <div class="arabic-example">يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ</div>
+      <div class="hint">( وہ جانتا ہے <span class="blank" data-blank="q12">____</span> اُن کے آگے ہے اور <span class="blank" data-blank="q12">____</span> اُن کے پیچھے ہے )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q12" value="نہیں" onchange="fillBlank('q12')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q12" value="جو" onchange="fillBlank('q12')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q13" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۳</span></div>
+      <div class="arabic-example">لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ</div>
+      <div class="hint">( اُسی کا ہے <span class="blank" data-blank="q13">____</span> آسمانوں میں ہے اور <span class="blank" data-blank="q13">____</span> زمین میں ہے )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q13" value="نہیں" onchange="fillBlank('q13')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q13" value="جو" onchange="fillBlank('q13')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q14" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۴</span></div>
+      <div class="arabic-example">خُذُوا مَا آتَيْنَاكُم بِقُوَّةٍ</div>
+      <div class="hint">( <span class="blank" data-blank="q14">____</span> ہم نے تمہیں دیا ہے، اُسے مضبوطی سے پکڑ لو )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q14" value="نہیں" onchange="fillBlank('q14')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q14" value="جو" onchange="fillBlank('q14')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q15" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۵</span></div>
+      <div class="arabic-example">وَاذْكُرُوا مَا فِيهِ</div>
+      <div class="hint">( اور یاد رکھو <span class="blank" data-blank="q15">____</span> اُس میں ہے )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q15" value="نہیں" onchange="fillBlank('q15')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q15" value="جو" onchange="fillBlank('q15')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q16" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۶</span></div>
+      <div class="arabic-example">لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ</div>
+      <div class="hint">( اُس کے لیے ہے <span class="blank" data-blank="q16">____</span> اُس نے کمایا، اور اُس پر ہے <span class="blank" data-blank="q16">____</span> اُس نے کمایا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q16" value="نہیں" onchange="fillBlank('q16')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q16" value="جو" onchange="fillBlank('q16')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q17" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۷</span></div>
+      <div class="arabic-example">رَبَّنَا آتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ</div>
+      <div class="hint">( اے ہمارے رب، ہمیں وہ عطا فرما <span class="blank" data-blank="q17">____</span> کا تُو نے اپنے رسولوں کے ذریعے وعدہ کیا )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q17" value="نہیں" onchange="fillBlank('q17')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q17" value="جو" onchange="fillBlank('q17')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q18" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۱۸</span></div>
+      <div class="arabic-example">وَمَا تَشَاءُونَ إِلَّا أَن يَشَاءَ اللَّهُ</div>
+      <div class="hint">( تم کچھ <span class="blank" data-blank="q18">____</span> چاہ سکتے مگر یہ کہ اللہ چاہے )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q18" value="نہیں" onchange="fillBlank('q18')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q18" value="جو" onchange="fillBlank('q18')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q19" data-answer="جو">
+      <div class="q-label"><span class="q-number">۱۹</span></div>
+      <div class="arabic-example">وَلَهُم مَّا يَدَّعُونَ</div>
+      <div class="hint">( اور اُن کے لیے ہے <span class="blank" data-blank="q19">____</span> وہ مانگیں گے )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q19" value="نہیں" onchange="fillBlank('q19')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q19" value="جو" onchange="fillBlank('q19')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-q" id="q20" data-answer="نہیں">
+      <div class="q-label"><span class="q-number">۲۰</span></div>
+      <div class="arabic-example">وَمَا كَانَ لِنَفْسٍ أَن تَمُوتَ إِلَّا بِإِذْنِ اللَّهِ</div>
+      <div class="hint">( کسی جان کے لیے ممکن <span class="blank" data-blank="q20">____</span> کہ مرے مگر اللہ کے حکم سے )</div>
+      <div class="options">
+        <label class="opt"><input type="radio" name="q20" value="نہیں" onchange="fillBlank('q20')"> نہیں</label>
+        <label class="opt"><input type="radio" name="q20" value="جو" onchange="fillBlank('q20')"> جو</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+  </div>
+
+  <button id="checkBtn" onclick="checkQuiz()">تمام جوابات چیک کریں ✓</button>
+  <div id="scoreBox"></div>
+
+</div>
+
+<script>
+const navGrid = document.getElementById('navGrid');
+const urduDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+function toUrduNum(n){
+  return String(n).split('').map(d => urduDigits[d]).join('');
+}
+for(let i=1;i<=20;i++){
+  const a = document.createElement('a');
+  a.href = '#q'+i;
+  a.className = 'nav-btn';
+  a.id = 'nav-q'+i;
+  a.textContent = toUrduNum(i);
+  navGrid.appendChild(a);
+}
+
+function fillBlank(qName){
+  const selectedInput = document.querySelector('input[name="' + qName + '"]:checked');
+  const q = selectedInput.closest('.quiz-q');
+  const correctAnswer = q.getAttribute('data-answer');
+  const selected = selectedInput.value;
+  const isCorrect = selected === correctAnswer;
+
+  const blanks = q.querySelectorAll('.blank[data-blank="' + qName + '"]');
+  blanks.forEach(b => {
+    b.textContent = selected;
+    b.classList.remove('filled-correct','filled-wrong');
+    void b.offsetWidth;
+    b.classList.add(isCorrect ? 'filled-correct' : 'filled-wrong');
+  });
+
+  const feedback = q.querySelector('.feedback');
+  q.classList.remove('correct-box','incorrect-box');
+  const navBtn = document.getElementById('nav-' + qName);
+  navBtn.classList.remove('done-correct','done-wrong');
+
+  if(isCorrect){
+    feedback.textContent = '✅ درست جواب!';
+    feedback.className = 'feedback correct';
+    q.classList.add('correct-box');
+    navBtn.classList.add('done-correct');
+  } else {
+    feedback.textContent = '❌ غلط — صحیح جواب: ' + correctAnswer;
+    feedback.className = 'feedback incorrect';
+    q.classList.add('incorrect-box');
+    navBtn.classList.add('done-wrong');
+  }
+}
+
+function checkQuiz(){
+  const questions = document.querySelectorAll('.quiz-q');
+  let score = 0;
+  let unanswered = 0;
+
+  questions.forEach(q => {
+    const correctAnswer = q.getAttribute('data-answer');
+    const selected = q.querySelector('input[type="radio"]:checked');
+    if(!selected){
+      unanswered++;
+      return;
+    }
+    if(selected.value === correctAnswer){
+      score++;
+    }
+  });
+
+  const scoreBox = document.getElementById('scoreBox');
+  if(unanswered > 0){
+    scoreBox.textContent = 'ابھی ' + toUrduNum(unanswered) + ' سوالات باقی ہیں — سب کے جواب دیں';
+    scoreBox.style.color = '#b3261e';
+  } else {
+    scoreBox.textContent = 'آپ کے نمبر: ' + toUrduNum(score) + ' / ' + toUrduNum(questions.length);
+    scoreBox.style.color = score === questions.length ? '#1d7a3f' : 'var(--emerald-deep)';
+  }
+}
+</script>
+
+</body>
+</html>
